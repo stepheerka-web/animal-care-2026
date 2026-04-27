@@ -13,131 +13,198 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+        
         html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fff9f5;
+        }
+
         .hero-section { 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1920&q=80'); 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1920&q=80'); 
             background-size: cover; 
             background-position: center; 
         }
-        .urgent-card { transition: all 0.3s ease; }
-        .urgent-card:hover { transform: scale(1.02); }
+
+        /* Paw Print Background Effect */
+        .paw-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .paw-bg::before {
+            content: "\f1b0";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            font-size: 15rem;
+            color: rgba(244, 63, 94, 0.03);
+            top: -50px;
+            right: -50px;
+            transform: rotate(25deg);
+            pointer-events: none;
+        }
+
+        .floating-paws {
+            position: absolute;
+            color: rgba(99, 102, 241, 0.05);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card-soft {
+            border-radius: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-soft:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .btn-cute {
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+        }
+        .btn-cute:hover {
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        /* QR Code Container */
+        .qr-frame {
+            background: white;
+            padding: 1rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="text-gray-900">
 
-    <!-- 1. NAVIGATION (Дээд цэс) -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+    <!-- 1. NAVIGATION -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-orange-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-2">
-                <i class="fas fa-paw text-indigo-600 text-3xl"></i>
-                <span class="font-black text-2xl tracking-tighter uppercase">Animal Care</span>
-            </div>
-            <div class="hidden lg:flex items-center space-x-6 font-semibold text-sm uppercase tracking-wider">
-                <a href="#about" class="hover:text-indigo-600 transition">Төлөвлөгөө</a>
-                <a href="#urgent" class="text-rose-600 hover:text-rose-700 font-bold transition">Яаралтай тусламж</a>
-                <a href="#volunteer" class="hover:text-indigo-600 transition">Бүртгүүлэх</a>
-                <div class="flex space-x-4 border-l pl-6">
-                    <!-- ТАНЫ ФЭЙСБҮҮК ХАЯГ ХОЛБОГДСОН -->
-                    <a href="https://www.facebook.com/share/1JADJJqHeJ/" target="_blank" class="text-blue-600 text-xl hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                    <!-- ТАНЫ ИНСТАГРАМ ХАЯГ ХОЛБОГДСОН -->
-                    <a href="https://www.instagram.com/witchcraft_animal?igsh=emUzaXBnamx3dWM3" target="_blank" class="text-pink-600 text-xl hover:opacity-80 transition"><i class="fab fa-instagram"></i></a>
+                <div class="bg-indigo-500 p-2 rounded-xl">
+                    <i class="fas fa-paw text-white text-xl"></i>
                 </div>
+                <span class="font-black text-2xl tracking-tighter text-indigo-900">ANIMAL CARE</span>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-8 font-bold text-sm uppercase">
+                <a href="#about" class="hover:text-indigo-600 transition">Төлөвлөгөө</a>
+                <a href="#urgent" class="text-rose-500 hover:text-rose-600 transition flex items-center">
+                    <i class="fas fa-heart mr-2"></i> Туслах
+                </a>
+                <a href="#volunteer" class="hover:text-indigo-600 transition">Бүртгүүлэх</a>
+                <div class="flex space-x-4 border-l pl-6 border-orange-200">
+                    <a href="https://www.facebook.com/share/1JADJJqHeJ/" target="_blank" class="text-blue-500 text-xl hover:scale-125 transition"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/witchcraft_animal?igsh=emUzaXBnamx3dWM3" target="_blank" class="text-pink-500 text-xl hover:scale-125 transition"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <!-- Mobile Menu Icon (Visual only) -->
+            <div class="lg:hidden text-indigo-900 text-2xl">
+                <i class="fas fa-bars"></i>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section h-screen flex items-center justify-center text-center text-white px-4">
+    <section class="hero-section h-[90vh] flex items-center justify-center text-center text-white px-6">
         <div class="max-w-4xl">
-            <h1 class="text-5xl md:text-8xl font-extrabold mb-6 leading-none uppercase tracking-tighter">Амьтанд ээлтэй <br><span class="text-indigo-400 italic">нийгмийг</span> хамтдаа</h1>
-            <p class="text-xl md:text-2xl mb-10 text-gray-300 font-light max-w-2xl mx-auto">Мастер Төлөвлөгөө 2026: Бидний зорилго бол 400 гаруй амьтныг аварч, хариуцлагатай эздийг бэлтгэх юм.</p>
-            <div class="flex flex-wrap justify-center gap-5">
-                <a href="#urgent" class="bg-rose-600 hover:bg-rose-700 text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl transition transform hover:-translate-y-1">ЯАРАЛТАЙ ТУСЛАХ</a>
-                <a href="#volunteer" class="bg-white text-gray-900 px-10 py-5 rounded-2xl font-black text-lg shadow-2xl hover:bg-gray-100 transition transform hover:-translate-y-1">АРМИД НЭГДЭХ</a>
+            <div class="inline-block bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-white/30">
+                <span class="text-sm font-bold tracking-widest uppercase"><i class="fas fa-star mr-2"></i> Masterplan 2026</span>
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-tight">Амьтанд ээлтэй <br><span class="text-indigo-400">ертөнцийг</span> хамтдаа</h1>
+            <p class="text-lg md:text-2xl mb-12 text-gray-100 font-medium max-w-2xl mx-auto leading-relaxed">Бид 400 гаруй амьтныг аварч, хариуцлагатай эздийг бэлтгэхээр нэгдсэн хамт олон юм. 🐾</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#urgent" class="bg-rose-500 hover:bg-rose-600 text-white px-10 py-5 btn-cute font-black text-xl shadow-lg transform hover:-translate-y-1">ЯАРАЛТАЙ ТУСЛАХ</a>
+                <a href="#volunteer" class="bg-white text-indigo-900 px-10 py-5 btn-cute font-black text-xl shadow-lg hover:bg-gray-50 transform hover:-translate-y-1">АРМИД НЭГДЭХ</a>
             </div>
         </div>
     </section>
 
     <!-- Нэн яаралтай хэрэгцээ -->
-    <section id="urgent" class="py-32 bg-rose-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-20">
-                <span class="text-rose-600 font-bold uppercase tracking-[0.3em] text-sm">Яг одоо хэрэгтэй</span>
-                <h2 class="text-5xl font-black text-gray-900 mt-2 mb-4 uppercase tracking-tighter">Нэн яаралтай хэрэгцээ</h2>
-                <div class="h-1.5 w-24 bg-rose-600 mx-auto rounded-full"></div>
+    <section id="urgent" class="py-24 bg-[#fff9f5] paw-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center justify-center space-x-2 text-rose-500 mb-4 font-black uppercase tracking-widest text-sm">
+                    <i class="fas fa-bone"></i> <span>Яг одоо хэрэгтэй</span> <i class="fas fa-bone"></i>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-black text-gray-900">Нэн яаралтай тусламж</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Items -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-rose-100 text-center urgent-card">
-                    <div class="h-20 w-20 bg-rose-100 rounded-2xl mb-6 mx-auto flex items-center justify-center">
-                        <i class="fas fa-umbrella text-rose-500 text-3xl"></i>
+                <div class="bg-white p-10 card-soft shadow-xl border-b-4 border-rose-200 text-center">
+                    <div class="h-20 w-20 bg-rose-100 rounded-3xl mb-6 mx-auto flex items-center justify-center text-rose-500">
+                        <i class="fas fa-home text-3xl"></i>
                     </div>
-                    <h3 class="font-black text-xl mb-3 uppercase tracking-tight">Сүүдрэвч & Үүр</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Халуун, хүйтнээс хамгаалах нохойны үүр, сүүдрэвч барихад материал хэрэгтэй байна.</p>
+                    <h3 class="font-black text-xl mb-3 text-indigo-950">Сүүдрэвч & Үүр</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed font-medium">Халуун, хүйтнээс хамгаалах нохойны үүр барихад материал хэрэгтэй.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-rose-100 text-center urgent-card">
-                    <div class="h-20 w-20 bg-blue-100 rounded-2xl mb-6 mx-auto flex items-center justify-center">
-                        <i class="fas fa-pills text-blue-500 text-3xl"></i>
+                <div class="bg-white p-10 card-soft shadow-xl border-b-4 border-blue-200 text-center">
+                    <div class="h-20 w-20 bg-blue-100 rounded-3xl mb-6 mx-auto flex items-center justify-center text-blue-500">
+                        <i class="fas fa-first-aid text-3xl"></i>
                     </div>
-                    <h3 class="font-black text-xl mb-3 uppercase tracking-tight">Эм & Тан</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Шимэгч эсэргүүцэгч, дархлаа дэмжих витамин, яаралтай тусламжийн эмүүд.</p>
+                    <h3 class="font-black text-xl mb-3 text-indigo-950">Эм & Тан</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed font-medium">Шимэгч эсэргүүцэгч, дархлаа дэмжих витамин, яаралтай эмүүд.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-rose-100 text-center urgent-card">
-                    <div class="h-20 w-20 bg-amber-100 rounded-2xl mb-6 mx-auto flex items-center justify-center">
-                        <i class="fas fa-bone text-amber-500 text-3xl"></i>
+                <div class="bg-white p-10 card-soft shadow-xl border-b-4 border-amber-200 text-center">
+                    <div class="h-20 w-20 bg-amber-100 rounded-3xl mb-6 mx-auto flex items-center justify-center text-amber-500">
+                        <i class="fas fa-utensils text-3xl"></i>
                     </div>
-                    <h3 class="font-black text-xl mb-3 uppercase tracking-tight">Хоол & Хэвтэр</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Тэжээллэг хуурай хоол, зөөлөн хэвтэр, дулаан хөнжил, дэвсгэрүүд.</p>
+                    <h3 class="font-black text-xl mb-3 text-indigo-950">Хоол & Тэжээл</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed font-medium">Тэжээллэг хуурай хоол, зөөлөн хэвтэр, дулаан хөнжилүүд.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-rose-100 text-center urgent-card">
-                    <div class="h-20 w-20 bg-green-100 rounded-2xl mb-6 mx-auto flex items-center justify-center">
-                        <i class="fas fa-hand-holding-heart text-green-500 text-3xl"></i>
+                <div class="bg-white p-10 card-soft shadow-xl border-b-4 border-green-200 text-center">
+                    <div class="h-20 w-20 bg-green-100 rounded-3xl mb-6 mx-auto flex items-center justify-center text-green-500">
+                        <i class="fas fa-hand-holding-heart text-3xl"></i>
                     </div>
-                    <h3 class="font-black text-xl mb-3 uppercase tracking-tight">Мөнгөн хандив</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Үржил хаалгах хагалгааны төлбөр болон яаралтай зардалд зориулагдана.</p>
+                    <h3 class="font-black text-xl mb-3 text-indigo-950">Мөнгөн хандив</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed font-medium">Үржил хаалгах хагалгаа болон яаралтай зардалд зориулагдана.</p>
                 </div>
             </div>
 
-            <!-- Donation Info & Bank -->
-            <div class="mt-20 max-w-5xl mx-auto bg-indigo-900 text-white rounded-[3rem] shadow-2xl overflow-hidden">
-                <div class="flex flex-col md:flex-row">
-                    <div class="p-12 md:p-20 md:w-2/3 border-b md:border-b-0 md:border-r border-white/10">
-                        <h3 class="text-4xl font-black mb-10 italic uppercase tracking-tighter">Хандив өгөх данс</h3>
-                        <div class="space-y-8">
-                            <div class="flex items-start space-x-5">
-                                <div class="bg-indigo-500 p-4 rounded-2xl shadow-lg"><i class="fas fa-university text-xl"></i></div>
+            <!-- Donation & QR Section -->
+            <div class="mt-20 max-w-5xl mx-auto bg-gradient-to-br from-indigo-900 to-purple-900 text-white rounded-[3rem] shadow-2xl overflow-hidden relative">
+                <!-- Decorative Paws -->
+                <i class="fas fa-paw absolute top-10 left-10 text-white/5 text-9xl"></i>
+                
+                <div class="flex flex-col md:flex-row relative z-10">
+                    <div class="p-10 md:p-16 md:w-3/5">
+                        <h3 class="text-3xl md:text-4xl font-black mb-8 italic uppercase tracking-tighter">Хандивын мэдээлэл</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 bg-white/10 p-4 rounded-2xl border border-white/10">
+                                <div class="bg-white text-indigo-900 p-3 rounded-xl"><i class="fas fa-university"></i></div>
                                 <div>
-                                    <p class="text-xs text-indigo-300 uppercase font-black tracking-widest mb-1">Банкны нэр</p>
-                                    <p class="text-2xl font-bold">ХААН БАНК</p>
+                                    <p class="text-[10px] uppercase font-black text-indigo-300">Банкны нэр</p>
+                                    <p class="text-lg font-bold uppercase">Хаан Банк</p>
                                 </div>
                             </div>
-                            <div class="flex items-start space-x-5">
-                                <div class="bg-indigo-500 p-4 rounded-2xl shadow-lg"><i class="fas fa-id-card text-xl"></i></div>
+                            <div class="flex items-center space-x-4 bg-white/10 p-4 rounded-2xl border border-white/10">
+                                <div class="bg-white text-indigo-900 p-3 rounded-xl"><i class="fas fa-id-card"></i></div>
                                 <div>
-                                    <p class="text-xs text-indigo-300 uppercase font-black tracking-widest mb-1">Дансны дугаар</p>
-                                    <!-- ДАНСНЫ ДУГААРАА ЭНД ШАЛГААРАЙ -->
-                                    <p class="text-4xl font-black tracking-tighter text-white">5000 123 456</p>
+                                    <p class="text-[10px] uppercase font-black text-indigo-300">Дансны дугаар</p>
+                                    <p class="text-3xl font-black tracking-widest">5163266775</p>
                                 </div>
                             </div>
-                            <div class="flex items-start space-x-5">
-                                <div class="bg-indigo-500 p-4 rounded-2xl shadow-lg"><i class="fas fa-user text-xl"></i></div>
+                            <div class="flex items-center space-x-4 bg-white/10 p-4 rounded-2xl border border-white/10">
+                                <div class="bg-white text-indigo-900 p-3 rounded-xl"><i class="fas fa-user-circle"></i></div>
                                 <div>
-                                    <p class="text-xs text-indigo-300 uppercase font-black tracking-widest mb-1">Хүлээн авагч</p>
-                                    <p class="text-2xl font-bold uppercase">ANIMAL CARE PROJECT</p>
+                                    <p class="text-[10px] uppercase font-black text-indigo-300">Хүлээн авагч</p>
+                                    <p class="text-lg font-bold uppercase tracking-tight">ANIMAL CARE PROJECT</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="p-12 md:p-20 md:w-1/3 bg-white/5 flex flex-col items-center justify-center text-center">
-                        <div class="bg-white p-5 rounded-[2.5rem] mb-8 shadow-2xl w-56 h-56 flex items-center justify-center text-gray-800">
-                            <i class="fas fa-qrcode text-8xl"></i>
+                    
+                    <div class="p-10 md:p-16 md:w-2/5 bg-white/5 flex flex-col items-center justify-center text-center border-t md:border-t-0 md:border-l border-white/10">
+                        <!-- Generative QR Code for the specific account number -->
+                        <div class="qr-frame mb-6 group transition-transform hover:scale-110 duration-500">
+                            <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=5163266775&choe=UTF-8" alt="QR Code" class="w-40 h-40">
                         </div>
-                        <p class="font-black text-indigo-200 tracking-wide uppercase mb-4">SocialPay-ээр уншуулах</p>
-                        <div class="flex space-x-4">
-                             <a href="https://www.facebook.com/share/1JADJJqHeJ/" target="_blank" class="text-2xl hover:text-indigo-400"><i class="fab fa-facebook"></i></a>
-                             <a href="https://www.instagram.com/witchcraft_animal?igsh=emUzaXBnamx3dWM3" target="_blank" class="text-2xl hover:text-indigo-400"><i class="fab fa-instagram"></i></a>
-                        </div>
+                        <p class="font-black text-white tracking-widest uppercase text-sm mb-2">QR Уншуулах</p>
+                        <p class="text-xs text-indigo-200 font-medium leading-relaxed">Khan Bank апп-аар шууд <br>уншуулан хандив илгээх боломжтой</p>
                     </div>
                 </div>
             </div>
@@ -145,75 +212,109 @@
     </section>
 
     <!-- Төлөвлөгөө -->
-    <section id="about" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                <div class="max-w-xl text-left">
-                    <span class="text-indigo-600 font-bold uppercase tracking-[0.3em] text-sm">Алсын хараа</span>
-                    <h2 class="text-5xl font-black mt-4 uppercase tracking-tighter">Мастер Төлөвлөгөө 2026</h2>
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="max-w-xl">
+                    <div class="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full inline-block text-xs font-black uppercase tracking-widest mb-4">Алсын хараа</div>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 uppercase leading-none">Мастер Төлөвлөгөө <br><span class="text-indigo-600">2026</span></h2>
                 </div>
-                <p class="text-gray-500 text-lg leading-relaxed max-w-sm">Бид амьтны эрхийг хамгаалах 4 үндсэн баганыг ийнхүү тодорхойлж байна.</p>
+                <div class="text-gray-500 font-medium border-l-4 border-indigo-500 pl-6 max-w-sm">
+                    Бид 2026 он хүртэл амьтны эрхийг хамгаалах 4 үндсэн баганыг хэрэгжүүлнэ.
+                </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="group p-12 bg-gray-50 rounded-[3rem] border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-500">
-                    <h4 class="text-3xl font-black mb-6 uppercase tracking-tight text-indigo-900">01. Үржил хаалгах аян</h4>
-                    <p class="text-gray-600 leading-relaxed text-lg mb-4 italic">"Асуудлыг уг үндсээр нь шийдэх."</p>
-                    <p class="text-gray-500">Бид сар бүр 30-аас доошгүй амьтныг үржил хаалгах хагалгаанд оруулж, нэгдсэн бүртгэлд хамруулна.</p>
+                <div class="p-10 bg-gray-50 card-soft border-2 border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-2xl">
+                    <div class="text-4xl mb-6">🏥</div>
+                    <h4 class="text-2xl font-black mb-4 text-indigo-900">01. Үржил хаалгах аян</h4>
+                    <p class="text-gray-500 leading-relaxed font-medium">Сар бүр 30-аас доошгүй амьтныг үржил хаалгах хагалгаанд оруулж, нэгдсэн системд бүртгэнэ.</p>
                 </div>
-                <div class="group p-12 bg-gray-50 rounded-[3rem] border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-500">
-                    <h4 class="text-3xl font-black mb-6 uppercase tracking-tight text-indigo-900">02. Хүүхдийн боловсрол</h4>
-                    <p class="text-gray-600 leading-relaxed text-lg mb-4 italic">"Гэсэрхэн төвөөр дамжуулан соён гэгээрүүлэх."</p>
-                    <p class="text-gray-500">Сургууль, цэцэрлэгүүдэд "Амьтанд ээлтэй хүн" боловсролын хөтөлбөрийг тогтмол зохион байгуулна.</p>
+                <div class="p-10 bg-gray-50 card-soft border-2 border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-2xl">
+                    <div class="text-4xl mb-6">🎓</div>
+                    <h4 class="text-2xl font-black mb-4 text-indigo-900">02. Хүүхдийн боловсрол</h4>
+                    <p class="text-gray-500 leading-relaxed font-medium">Сургууль, цэцэрлэгүүдэд "Амьтанд ээлтэй хүн" соён гэгээрүүлэх хөтөлбөрийг тогтмол зохион байгуулна.</p>
                 </div>
-                <div class="group p-12 bg-gray-50 rounded-[3rem] border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-500">
-                    <h4 class="text-3xl font-black mb-6 uppercase tracking-tight text-indigo-900">03. Асрамжийн тохижилт</h4>
-                    <p class="text-gray-600 leading-relaxed text-lg mb-4 italic">"Shaggy Tails-д стандарт орчин."</p>
-                    <p class="text-gray-500">Амьтдын амьдрах орчныг сайжруулах, өвлийн дулаалга, эрүүл ахуйн асуудлыг шийдвэрлэх.</p>
+                <div class="p-10 bg-gray-50 card-soft border-2 border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-2xl">
+                    <div class="text-4xl mb-6">🐾</div>
+                    <h4 class="text-2xl font-black mb-4 text-indigo-900">03. Асрамжийн тохижилт</h4>
+                    <p class="text-gray-500 leading-relaxed font-medium">Shaggy Tails болон Гэсэрхэн төвүүдийн амьдрах орчныг сайжруулж, өвлийн дулаалга хийнэ.</p>
                 </div>
-                <div class="group p-12 bg-gray-50 rounded-[3rem] border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-500">
-                    <h4 class="text-3xl font-black mb-6 uppercase tracking-tight text-indigo-900">04. Сайн дурынхны баг</h4>
-                    <p class="text-gray-600 leading-relaxed text-lg mb-4 italic">"WitchCraft Army-г нэгтгэх."</p>
-                    <p class="text-gray-500">Сайн дурынхныг системтэйгээр бүртгэж, асрамжийн газрын өдөр тутмын ажилд татан оролцуулна.</p>
+                <div class="p-10 bg-gray-50 card-soft border-2 border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-2xl">
+                    <div class="text-4xl mb-6">🛡️</div>
+                    <h4 class="text-2xl font-black mb-4 text-indigo-900">04. Сайн дурынхны баг</h4>
+                    <p class="text-gray-500 leading-relaxed font-medium">WitchCraft Army-г нэгтгэж, амьтан хамгааллын ажилд системтэйгээр татан оролцуулна.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Сайн дурынхны бүртгэл -->
-    <section id="volunteer" class="py-32 bg-slate-900 text-white relative">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="flex flex-col lg:flex-row gap-20 items-center">
-                <div class="lg:w-1/2">
-                    <span class="text-indigo-500 font-black uppercase tracking-[0.3em] text-sm mb-6 block">Хамтдаа илүү хүчтэй</span>
-                    <h2 class="text-6xl font-black mb-8 italic uppercase leading-none">WITCHCRAFT <br><span class="text-indigo-500">ARMY</span></h2>
-                    <p class="text-xl text-gray-400 mb-10 leading-relaxed">Бид зөвхөн санхүүгийн тусламж биш, таны хэдхэн цагийн тусламжийг ч бас өндрөөр үнэлнэ. Бүртгүүлээд бидний нэг хэсэг болоорой.</p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
-                            <p class="text-4xl font-black text-indigo-500 mb-1">400+</p>
-                            <p class="text-xs uppercase font-bold text-gray-500">Аврагдах амьтан</p>
+    <!-- Сайн дурынхны бүртгэл - WITCHCRAFT ARMY -->
+    <section id="volunteer" class="py-24 bg-indigo-950 text-white relative overflow-hidden">
+        <!-- Background Decoration for Mobile/Desktop -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <i class="fas fa-paw absolute top-10 left-10 text-8xl"></i>
+            <i class="fas fa-paw absolute bottom-20 right-10 text-9xl"></i>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <div class="inline-block bg-indigo-500/30 text-indigo-300 px-6 py-2 rounded-full mb-6 font-black uppercase text-xs tracking-widest border border-indigo-500/30">
+                        Бид хүлээж байна
+                    </div>
+                    <h2 class="text-5xl md:text-7xl font-black mb-8 italic leading-none uppercase">WITCHCRAFT <br><span class="text-indigo-400">ARMY</span></h2>
+                    <p class="text-lg md:text-xl text-indigo-100/70 mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
+                        Амьтанд хайртай хүн бүрт бидний хаалга нээлттэй. Таны хэдхэн цагийн тусламж нэгэн амьтны амьдралыг өөрчилж чадна. 🐶🐱
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0">
+                        <div class="bg-white/5 p-6 rounded-3xl border border-white/10 backdrop-blur-sm">
+                            <p class="text-4xl font-black text-indigo-400">400+</p>
+                            <p class="text-[10px] uppercase font-black text-gray-400 tracking-wider">Аврагдах амьтан</p>
                         </div>
-                        <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
-                            <p class="text-4xl font-black text-indigo-500 mb-1">120+</p>
-                            <p class="text-xs uppercase font-bold text-gray-500">Сайн дурынхан</p>
+                        <div class="bg-white/5 p-6 rounded-3xl border border-white/10 backdrop-blur-sm">
+                            <p class="text-4xl font-black text-indigo-400">120+</p>
+                            <p class="text-[10px] uppercase font-black text-gray-400 tracking-wider">Сайн дурынхан</p>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Registration Form -->
                 <div class="lg:w-1/2 w-full">
-                    <div class="bg-white p-12 rounded-[3rem] text-gray-900 shadow-2xl border-b-[10px] border-indigo-600">
-                        <h3 class="text-3xl font-black mb-8 text-center text-indigo-900 uppercase tracking-tight">Армид нэгдэх</h3>
-                        <!-- FORMSPREE ЭНД ХОЛБОГДСОН (mnqqonww) -->
-                        <form action="https://formspree.io/f/mnqqonww" method="POST" class="space-y-6">
-                            <input type="text" name="name" class="w-full px-6 py-5 bg-gray-100 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-lg" placeholder="Таны нэр" required>
-                            <input type="tel" name="phone" class="w-full px-6 py-5 bg-gray-100 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-lg" placeholder="Утасны дугаар" required>
-                            <select name="help_type" class="w-full px-6 py-5 bg-gray-100 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-lg appearance-none">
-                                <option>Сайн дурын ажилтан</option>
-                                <option>Түр гэрээр асрагч (Foster)</option>
-                                <option>Материаллаг тусламж</option>
-                                <option>Контент & Сошиал</option>
-                            </select>
-                            <button type="submit" class="w-full bg-indigo-600 text-white py-6 rounded-2xl font-black text-xl uppercase shadow-xl hover:bg-indigo-700 transition transform hover:scale-[1.02] active:scale-95">ИЛГЭЭХ</button>
+                    <div class="bg-white p-8 md:p-12 rounded-[3rem] text-gray-900 shadow-2xl border-b-[12px] border-indigo-500">
+                        <h3 class="text-3xl font-black mb-8 text-center text-indigo-900 uppercase tracking-tight">Эгдүүтэй армид нэгдэх</h3>
+                        
+                        <!-- FORMSPREE ШИНЭ ID (xbdqepva) ХОЛБОГДСОН -->
+                        <form action="https://formspree.io/f/xbdqepva" method="POST" class="space-y-5">
+                            <div>
+                                <label class="text-xs font-black uppercase text-gray-400 mb-2 block ml-2">Таны нэр</label>
+                                <input type="text" name="name" class="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-400 rounded-2xl outline-none text-lg transition" placeholder="Жишээ: Ану" required>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="text-xs font-black uppercase text-gray-400 mb-2 block ml-2">Имэйл</label>
+                                    <input type="email" name="email" class="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-400 rounded-2xl outline-none text-lg transition" placeholder="example@mail.mn" required>
+                                </div>
+                                <div>
+                                    <label class="text-xs font-black uppercase text-gray-400 mb-2 block ml-2">Утас</label>
+                                    <input type="tel" name="phone" class="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-400 rounded-2xl outline-none text-lg transition" placeholder="9911...." required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs font-black uppercase text-gray-400 mb-2 block ml-2">Туслах чиглэл</label>
+                                <select name="help_type" class="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-400 rounded-2xl outline-none text-lg transition appearance-none">
+                                    <option>Сайн дурын ажилтан</option>
+                                    <option>Түр гэрээр асрагч (Foster)</option>
+                                    <option>Контент & Сошиал</option>
+                                    <option>Хандив өгөх</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs font-black uppercase text-gray-400 mb-2 block ml-2">Мессеж</label>
+                                <textarea name="message" class="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-400 rounded-2xl outline-none text-lg transition" placeholder="Та өөрийнхөө талаар товч бичээрэй..." rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-xl uppercase shadow-xl hover:bg-indigo-700 transition transform hover:scale-[1.02] active:scale-95">ИЛГЭЭХ 🐾</button>
                         </form>
                     </div>
                 </div>
@@ -222,46 +323,25 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-20 bg-white border-t">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <!-- Brand -->
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center space-x-2 mb-6">
+    <footer class="py-16 bg-white border-t border-orange-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start space-x-2 mb-4">
                         <i class="fas fa-paw text-indigo-600 text-3xl"></i>
-                        <span class="font-black text-2xl tracking-tighter uppercase">Animal Care</span>
+                        <span class="font-black text-2xl tracking-tighter uppercase text-indigo-900">Animal Care</span>
                     </div>
-                    <p class="text-gray-500 max-w-sm mb-6 leading-relaxed text-sm">Бид 2026 он гэхэд Монгол улсад амьтны эрхийг хамгаалах, хариуцлагатай эздийг бэлтгэх нэгдсэн системийг бий болгохоор ажиллаж байна.</p>
-                    <div class="flex space-x-5">
-                        <a href="https://www.facebook.com/share/1JADJJqHeJ/" target="_blank" class="text-gray-400 hover:text-blue-600 text-2xl transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/witchcraft_animal?igsh=emUzaXBnamx3dWM3" target="_blank" class="text-gray-400 hover:text-pink-600 text-2xl transition"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <p class="text-gray-400 text-sm font-medium">Амьтанд ээлтэй нийгмийн төлөө хамтдаа.</p>
                 </div>
                 
-                <!-- Quick Contact -->
-                <div>
-                    <h4 class="font-black text-xs uppercase tracking-widest text-gray-400 mb-6">Холбоо барих</h4>
-                    <ul class="space-y-4 text-sm font-bold text-gray-700">
-                        <li class="flex items-center space-x-3"><i class="fas fa-phone text-indigo-600"></i> <span>+976 9XXX XXXX</span></li>
-                        <li class="flex items-center space-x-3"><i class="fas fa-envelope text-indigo-600"></i> <span>info@animalcare.mn</span></li>
-                        <li class="flex items-center space-x-3"><i class="fas fa-map-marker-alt text-indigo-600"></i> <span>Улаанбаатар, Монгол</span></li>
-                    </ul>
-                </div>
-
-                <!-- Partners -->
-                <div>
-                    <h4 class="font-black text-xs uppercase tracking-widest text-gray-400 mb-6">Хамтрагчид</h4>
-                    <ul class="space-y-3 text-xs font-black uppercase text-gray-500 tracking-wider">
-                        <li>WitchCraft</li>
-                        <li>Гэсэрхэн</li>
-                        <li>Shaggy Tails</li>
-                        <li>Эгдүүтэй Тооройнууд</li>
-                    </ul>
+                <div class="flex space-x-6">
+                    <a href="https://www.facebook.com/share/1JADJJqHeJ/" target="_blank" class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-blue-600 text-xl hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/witchcraft_animal?igsh=emUzaXBnamx3dWM3" target="_blank" class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-pink-600 text-xl hover:bg-pink-600 hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             
-            <div class="pt-10 border-t border-gray-100 text-center">
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">© 2026 Animal Care Masterplan - Бүх эрх хуулиар хамгаалагдсан</p>
+            <div class="mt-12 pt-8 border-t border-gray-100 text-center">
+                <p class="text-[10px] font-black text-gray-300 uppercase tracking-[0.5em]">© 2026 Animal Care Project - Made with ❤️ for Animals</p>
             </div>
         </div>
     </footer>
