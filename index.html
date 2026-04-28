@@ -69,7 +69,7 @@
                 <a href="#projects" class="hover:text-rose-500 transition">Төсөл</a>
                 <a href="#adoption" class="hover:text-rose-500 transition">Амьтад</a>
                 <a href="#donation" class="hover:text-rose-500 transition">Хандив</a>
-                <a href="#partners" class="hover:text-rose-500 transition">Хамтрагчид</a>
+                <a href="#contact" class="hover:text-rose-500 transition">Холбоо барих</a>
                 
                 <div class="relative group lang-select cursor-pointer bg-gray-100 px-4 py-2 rounded-full flex items-center space-x-2">
                     <i class="fas fa-globe text-gray-500"></i>
@@ -220,8 +220,39 @@
         </div>
     </section>
 
+    <!-- CONTACT / FORMSPREE SECTION -->
+    <section id="contact" class="py-24 px-6 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black uppercase italic italic">Санал хүсэлт илгээх</h2>
+                <p class="text-gray-500 mt-4 font-medium">Танд асуух зүйл эсвэл хамтран ажиллах санал байвал бидэнд бичээрэй.</p>
+            </div>
+
+            <form action="https://formspree.io/f/xvgzlowj" method="POST" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2 text-left">
+                        <label class="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">Таны нэр</label>
+                        <input type="text" name="name" required class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-rose-500 focus:outline-none transition font-bold" placeholder="Нэрээ оруулна уу">
+                    </div>
+                    <div class="space-y-2 text-left">
+                        <label class="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">Цахим шуудан</label>
+                        <input type="email" name="email" required class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-rose-500 focus:outline-none transition font-bold" placeholder="email@example.com">
+                    </div>
+                </div>
+                <div class="space-y-2 text-left">
+                    <label class="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">Мессеж</label>
+                    <textarea name="message" required rows="5" class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-rose-500 focus:outline-none transition font-bold" placeholder="Бидэнд хэлэх зүйлээ энд бичнэ үү..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-rose-500 text-white font-black py-5 rounded-2xl shadow-xl hover:bg-rose-600 transition flex items-center justify-center space-x-3 uppercase tracking-wider">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Илгээх</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
     <!-- PARTNERS SECTION -->
-    <section id="partners" class="py-24 bg-white px-6 border-t border-gray-100">
+    <section id="partners" class="py-24 bg-gray-50/50 px-6 border-t border-gray-100">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-black uppercase italic tracking-tighter">Хамтран ажиллагч байгууллагууд</h2>
@@ -229,22 +260,22 @@
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <a href="https://www.facebook.com/share/1DyTts9mri/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-gray-50/50">
+                <a href="https://www.facebook.com/share/1DyTts9mri/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
                     <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
                     <p class="font-black text-xs uppercase text-gray-800">Эгдүүтэй тоорой</p>
                 </a>
 
-                <a href="https://www.facebook.com/share/14a2XwCJNid/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-gray-50/50">
+                <a href="https://www.facebook.com/share/14a2XwCJNid/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
                     <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
                     <p class="font-black text-xs uppercase text-gray-800">SHAGGY TAILS</p>
                 </a>
 
-                <a href="https://www.facebook.com/share/1TBRbV2Smy/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-gray-50/50">
+                <a href="https://www.facebook.com/share/1TBRbV2Smy/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
                     <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
                     <p class="font-black text-xs uppercase text-gray-800 leading-tight">ГЭСЭРХЭН - ANIMAL RESCUE MONGOLIA</p>
                 </a>
 
-                <a href="https://www.facebook.com/share/1H6G2YVcvT/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-gray-50/50">
+                <a href="https://www.facebook.com/share/1H6G2YVcvT/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
                     <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
                     <p class="font-black text-xs uppercase text-gray-800">WITCHCRAFT - ANIMAL CARE</p>
                 </a>
@@ -304,7 +335,6 @@
             document.getElementById('project-details-link').href = config.projectUrl;
             document.getElementById('urgent-animals-link').href = config.urgentAnimalsUrl;
             document.getElementById('our-animals-link').href = config.ourAnimalsUrl;
-            // Ерөнхий линкийг 'Тулгамдаад байгаа' руу холболоо
             document.getElementById('flipbook-link').href = config.urgentAnimalsUrl;
             document.getElementById('hero-pdf-link').href = config.projectUrl;
             document.getElementById('video-frame').src = config.videoUrl;
