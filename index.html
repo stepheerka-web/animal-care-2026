@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WitchCraft Army - Animal Care 2026</title>
     
+    <!-- External Resources -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -20,48 +21,90 @@
 
         body {
             font-family: 'Manrope', sans-serif;
-            background-color: var(--light);
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 40c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm10-10c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm20 0c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm10 10c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm-15 5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10z' fill='%23f43f5e' fill-opacity='0.08'/%3E%3C/svg%3E");
-            transition: all 0.3s ease;
+            background-color: #fffafa; /* Бага зэрэг ягаан туяатай цагаан */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
 
         .scroll-smooth { scroll-behavior: smooth; }
-        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
-        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)); }
-        .qr-card { background: white; padding: 1.5rem; border-radius: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid #f3f4f6; }
-        .flip-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .flip-btn:hover { transform: translateY(-3px); }
-        .lang-select:hover .lang-dropdown { display: block; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
+        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)); }
         
-        .tab-btn.active { border-bottom: 3px solid var(--primary); color: var(--primary); }
-        
-        .footer-bg {
-            background: linear-gradient(rgba(24, 24, 27, 0.92), rgba(24, 24, 27, 0.92)), url('https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+        /* Floating Paw Background */
+        .paw-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+        .floating-paw {
+            position: absolute;
+            color: rgba(244, 63, 94, 0.1);
+            animation: float 20s infinite linear;
         }
 
-        .partner-card {
-            transition: all 0.3s ease;
-            border: 1px solid #f1f5f9;
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
         }
-        .partner-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(244, 63, 94, 0.1);
+
+        /* Language Dropdown */
+        .lang-dropdown:hover .lang-menu { display: block; }
+        .lang-menu { 
+            display: none; 
+            position: absolute; 
+            right: 0; 
+            top: 100%; 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); 
+            min-width: 140px; 
+            z-index: 100; 
+            overflow: hidden;
         }
+        .lang-item { padding: 12px 20px; cursor: pointer; transition: all 0.2s; font-size: 14px; color: var(--dark); font-weight: 600; }
+        .lang-item:hover { background: #fff1f2; color: #f43f5e; }
+
+        .tab-btn.active { 
+            background-color: var(--primary); 
+            color: white; 
+            box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.3);
+        }
+        
+        .registration-card {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+            border: 8px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #f43f5e; border-radius: 10px; }
     </style>
 </head>
 <body class="scroll-smooth text-dark">
 
+    <!-- Floating Background Paws -->
+    <div class="paw-bg">
+        <i class="fas fa-paw floating-paw" style="left: 10%; font-size: 40px; color: #fbbf24; animation-delay: 0s;"></i>
+        <i class="fas fa-paw floating-paw" style="left: 25%; font-size: 60px; color: #f43f5e; animation-delay: 5s;"></i>
+        <i class="fas fa-paw floating-paw" style="left: 45%; font-size: 30px; color: #60a5fa; animation-delay: 2s;"></i>
+        <i class="fas fa-paw floating-paw" style="left: 70%; font-size: 80px; color: #34d399; animation-delay: 8s;"></i>
+        <i class="fas fa-paw floating-paw" style="left: 85%; font-size: 50px; color: #f472b6; animation-delay: 3s;"></i>
+        <!-- More paws can be added via JS or manually -->
+    </div>
+
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 glass-nav border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-12">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-paw text-rose-500 text-3xl"></i>
-                    <span class="font-extrabold text-2xl tracking-tight uppercase">WitchCraft <span class="text-rose-500">Army</span></span>
-                </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-paw text-rose-500 text-3xl"></i>
+                <span class="font-extrabold text-2xl tracking-tight uppercase">WitchCraft <span class="text-rose-500">Army</span></span>
             </div>
 
             <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase tracking-wider">
@@ -69,277 +112,347 @@
                 <a href="#projects" class="hover:text-rose-500 transition">Төсөл</a>
                 <a href="#adoption" class="hover:text-rose-500 transition">Амьтад</a>
                 <a href="#donation" class="hover:text-rose-500 transition">Хандив</a>
-                <a href="#contact" class="hover:text-rose-500 transition">Холбоо барих</a>
+                <a href="#partners" class="hover:text-rose-500 transition">Хамтрагчид</a>
+                <a href="#registration" class="hover:text-rose-500 transition">Нэгдэх</a>
                 
-                <div class="relative group lang-select cursor-pointer bg-gray-100 px-4 py-2 rounded-full flex items-center space-x-2">
-                    <i class="fas fa-globe text-gray-500"></i>
-                    <span id="current-lang-label">MN</span>
-                    <div class="lang-dropdown hidden absolute top-full right-0 mt-2 w-32 bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden">
-                        <button onclick="changeLang('mn')" class="w-full text-left px-4 py-3 hover:bg-rose-50 transition border-b border-gray-50 font-bold">Монгол</button>
-                        <button onclick="changeLang('en')" class="w-full text-left px-4 py-3 hover:bg-rose-50 transition border-b border-gray-50 font-bold">English</button>
-                        <button onclick="changeLang('kr')" class="w-full text-left px-4 py-3 hover:bg-rose-50 transition border-b border-gray-50 font-bold">한국어</button>
+                <div class="relative lang-dropdown ml-4">
+                    <button class="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 hover:border-rose-200 transition">
+                        <i class="fas fa-globe text-rose-500"></i>
+                        <span>MN</span>
+                        <i class="fas fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-item" onclick="changeLanguage('mn')">Монгол</div>
+                        <div class="lang-item" onclick="changeLanguage('en')">English</div>
+                        <div class="lang-item" onclick="changeLanguage('ko')">한국어</div>
+                        <div class="lang-item" onclick="changeLanguage('ru')">Русский</div>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header class="relative h-[90vh] flex items-center justify-center text-center overflow-hidden pt-20">
+    <!-- HEADER SECTION -->
+    <header class="relative h-[85vh] flex items-center justify-center text-center overflow-hidden pt-20">
         <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1920&q=80" class="absolute inset-0 w-full h-full object-cover" alt="Hero Background">
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 max-w-4xl mx-auto px-6">
+        <div class="relative z-10 max-w-5xl mx-auto px-6">
             <h1 class="text-6xl md:text-8xl font-extrabold text-white mb-8 leading-none tracking-tighter">
-                Бидний нэг болж <br><span class="text-rose-500">Амь авраарай</span>
+                Бидний нэг болж <br><span class="text-rose-500 italic">Амь авраарай</span>
             </h1>
-            <p class="text-xl text-gray-200 mb-12 max-w-2xl mx-auto font-medium">
-                Таны хэдхэн хормын оролцоо нэгэн амьтны насан туршийн аз жаргал болно.
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#projects" class="bg-rose-500 text-white px-10 py-5 rounded-2xl font-black flex items-center space-x-3 flip-btn shadow-xl">
-                    <i class="fas fa-play-circle"></i>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#projects" class="bg-rose-500 text-white px-10 py-5 rounded-full font-black flex items-center space-x-3 shadow-xl uppercase transition hover:scale-105 active:scale-95">
+                    <i class="fas fa-play-circle text-xl"></i>
                     <span>Төсөл үзэх</span>
                 </a>
-                <a id="hero-pdf-link" href="#" target="_blank" class="bg-white text-dark px-10 py-5 rounded-2xl font-black flex items-center space-x-3 flip-btn shadow-xl">
-                    <i class="fas fa-file-pdf"></i>
-                    <span>Танилцуулга (Flipbook)</span>
+                <a href="https://publuu.com/flip-book/1096978/2444987" target="_blank" class="bg-white text-dark px-10 py-5 rounded-full font-black flex items-center space-x-3 shadow-xl uppercase transition hover:scale-105">
+                    <i class="fas fa-file-pdf text-xl text-rose-500"></i>
+                    <span>Танилцуулга</span>
                 </a>
             </div>
         </div>
     </header>
 
     <!-- VISION SECTION -->
-    <section id="vision" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center text-left">
+    <section id="vision" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-8">
-                <div class="inline-block bg-rose-100 text-rose-600 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">Бидний алсын хараа</div>
-                <h2 class="text-5xl font-extrabold uppercase leading-none">Салшгүй <br>Холбоо</h2>
-                <div class="text-lg text-gray-600 leading-relaxed space-y-4">
-                    <p>Монгол орны эрс тэс уур амьсгалд амьтдад туслах нь зөвхөн асрамж биш, харин хүнлэг ёсны томоохон хариуцлага юм. Бид гудамжинд хаягдаж буй амьтдад системтэй туслалцаа үзүүлж, нийгмийн хандлагыг өөрчлөхөөр зорьж байна.</p>
-                </div>
+                <div class="inline-block bg-rose-100 text-rose-600 px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest">Бидний алсын хараа</div>
+                <h2 class="text-5xl font-extrabold uppercase leading-none italic">Бид тэдний <br><span class="text-rose-500 underline decoration-4 underline-offset-8">Цорын ганц</span> найдвар</h2>
+                <p class="text-lg text-gray-600 leading-relaxed font-medium">Хүн болон амьтны хоорондын нандин холбоог хамгаалах, тусламж хэрэгтэй байгаа амьтан бүрт хүрч ажиллах нь бидний эрхэм зорилго юм.</p>
             </div>
             <div class="relative">
-                <img src="https://images.unsplash.com/photo-1591768575198-88dac53fbd0a?auto=format&fit=crop&w=800&q=80" class="rounded-[3rem] shadow-2xl border-8 border-white object-cover h-[500px] w-full" alt="Real Bond">
+                <div class="absolute -top-4 -left-4 w-24 h-24 bg-rose-500 rounded-full flex items-center justify-center text-white text-3xl rotate-12 z-10 shadow-lg">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&w=800&q=80" class="rounded-[3rem] shadow-2xl border-[12px] border-white object-cover h-[500px] w-full" alt="Rescuing Animal">
             </div>
         </div>
     </section>
 
-    <!-- PROJECT VIDEO SECTION -->
-    <section id="projects" class="py-24 bg-gray-50/50 px-6">
+    <!-- PROJECTS -->
+    <section id="projects" class="py-24 bg-white/50 backdrop-blur-sm px-6">
         <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-4xl font-black mb-12 uppercase italic">Төсөл ба Видео</h2>
-            <div class="aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-black relative group border-8 border-white">
-                <iframe id="video-frame" src="" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="mt-12">
-                <a id="project-details-link" href="#" target="_blank" class="inline-block bg-dark text-white px-10 py-5 rounded-2xl font-black hover:bg-gray-800 transition shadow-lg uppercase tracking-wider">
-                    Төслийн дэлгэрэнгүйг үзэх
-                </a>
+            <h2 class="text-4xl font-black mb-12 uppercase italic tracking-tighter">Төсөл ба Видео</h2>
+            <div class="aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-black relative border-8 border-white">
+                <iframe id="video-frame" src="https://player.vimeo.com/video/1187192383?h=86e2467d13" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <!-- ANIMALS SECTION -->
+    <!-- ANIMALS -->
     <section id="adoption" class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6 border-b border-gray-100 pb-8">
-                <h2 class="text-5xl font-extrabold uppercase italic">Амьтад</h2>
-                <a id="flipbook-link" href="#" target="_blank" class="text-rose-500 font-black flex items-center space-x-2 group">
-                    <i class="fas fa-external-link-alt group-hover:rotate-12 transition"></i>
-                    <span>БҮХ ТАНИЛЦУУЛГА ҮЗЭХ</span>
-                </a>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <!-- Тулгамдаад байгаа -->
-                <div class="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 space-y-8">
-                    <h3 class="text-3xl font-black text-rose-500 uppercase tracking-tighter">Тулгамдаад байгаа</h3>
-                    <p class="text-gray-500 text-lg leading-relaxed">
-                        Яаралтай эмчилгээ болон түр асрамж шаардлагатай байгаа амьтдын мэдээллийг эндээс харна уу. Бидний тусламж тэдэнд яг одоо хэрэгтэй байна.
-                    </p>
-                    <a id="urgent-animals-link" href="#" target="_blank" class="inline-flex items-center space-x-3 text-dark font-black hover:text-rose-500 transition bg-gray-50 px-6 py-3 rounded-xl">
-                        <span>ДЭЛГЭРЭНГҮЙ ҮЗЭХ</span>
-                        <i class="fas fa-arrow-right"></i>
+            <h2 class="text-5xl font-extrabold uppercase italic mb-16 text-center">Асрамжийн мэдээлэл</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-12 rounded-[3.5rem] shadow-xl border border-gray-100 hover:border-rose-200 transition-all group">
+                    <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-ambulance text-rose-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-rose-500 uppercase tracking-tighter mb-4">Тулгамдаад байгаа</h3>
+                    <p class="text-gray-500 font-medium mb-8">Яаралтай тусламж, эмчилгээ болон эзэн шаардлагатай байгаа амьтдын мэдээлэл.</p>
+                    <a href="https://publuu.com/flip-book/1096978/2444987" target="_blank" class="bg-dark text-white px-8 py-4 rounded-2xl font-black uppercase text-sm inline-flex items-center space-x-3 hover:bg-rose-500 transition">
+                        <span>Мэдээлэл үзэх</span> <i class="fas fa-external-link-alt text-xs"></i>
                     </a>
                 </div>
-                <!-- Манай амьтад -->
-                <div class="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 space-y-8">
-                    <h3 class="text-3xl font-black text-emerald-500 uppercase tracking-tighter">Манай амьтад</h3>
-                    <p class="text-gray-500 text-lg leading-relaxed">
-                        Асрамжинд байгаа болон амжилттай үрчлэгдсэн амьтдын түүх. Шинэ гэр бүлээ хүлээж буй болон аз жаргалтай болсон найзууд минь.
-                    </p>
-                    <a id="our-animals-link" href="#" target="_blank" class="inline-flex items-center space-x-3 text-dark font-black hover:text-emerald-500 transition bg-gray-50 px-6 py-3 rounded-xl">
-                        <span>ДЭЛГЭРЭНГҮЙ ҮЗЭХ</span>
-                        <i class="fas fa-arrow-right"></i>
+                <div class="bg-white p-12 rounded-[3.5rem] shadow-xl border border-gray-100 hover:border-emerald-200 transition-all group">
+                    <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-home text-emerald-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-emerald-500 uppercase tracking-tighter mb-4">Манай амьтад</h3>
+                    <p class="text-gray-500 font-medium mb-8">Асрамжинд байгаа болон үрчлэгдсэн аз жаргалтай амьтдын каталог.</p>
+                    <a href="https://publuu.com/flip-book/1096978/2444973" target="_blank" class="bg-dark text-white px-8 py-4 rounded-2xl font-black uppercase text-sm inline-flex items-center space-x-3 hover:bg-emerald-500 transition">
+                        <span>Каталог үзэх</span> <i class="fas fa-external-link-alt text-xs"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- DONATION SECTION -->
-    <section id="donation" class="py-24 bg-gray-50/50 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold mb-12 uppercase italic">Дэмжлэг үзүүлэх</h2>
+    <!-- DONATION SECTION (UPDATED) -->
+    <section id="donation" class="py-24 bg-rose-50/50 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold mb-4 uppercase italic">Дэмжлэг үзүүлэх</h2>
+            <p class="text-gray-500 font-bold mb-12 uppercase tracking-widest text-sm">Хандив өгөх хэлбэрээ сонгоно уу</p>
             
-            <div class="flex justify-center space-x-8 mb-16 border-b border-gray-200">
-                <button onclick="switchDonation('money')" id="tab-money" class="tab-btn active pb-4 font-black uppercase text-xs tracking-widest">Мөнгөн хандив</button>
-                <button onclick="switchDonation('items')" id="tab-items" class="tab-btn pb-4 font-black uppercase text-xs tracking-widest">Эд зүйл</button>
-                <button onclick="switchDonation('intl')" id="tab-intl" class="tab-btn pb-4 font-black uppercase text-xs tracking-widest">Гадаад данс</button>
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <button onclick="switchDonation('local')" id="tab-local" class="tab-btn active px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest transition-all">Мөнгөн (Монгол)</button>
+                <button onclick="switchDonation('global')" id="tab-global" class="tab-btn bg-white px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest transition-all">Мөнгөн (International)</button>
+                <button onclick="switchDonation('items')" id="tab-items" class="tab-btn bg-white px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest transition-all">Эд зүйлс (Хоол/Хэрэгсэл)</button>
             </div>
 
-            <div id="content-money" class="donation-content">
-                <div class="qr-card mx-auto inline-block">
-                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=5163266775&choe=UTF-8" class="w-64 h-64 rounded-2xl mx-auto" alt="Khan Bank QR">
-                    <div class="mt-8 text-rose-500 font-black text-xl uppercase tracking-tighter">
-                        Хаан Банк: 5163266775
+            <!-- MNT Donation -->
+            <div id="content-local" class="donation-content">
+                <div class="bg-white p-12 rounded-[4rem] shadow-2xl inline-block border-4 border-rose-100 relative">
+                    <div class="absolute -top-6 -right-6 bg-rose-500 text-white w-12 h-12 rounded-full flex items-center justify-center animate-bounce shadow-lg">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <p class="text-gray-400 mt-2 font-bold uppercase text-[10px] tracking-widest">WitchCraft Army NGO</p>
-                </div>
-            </div>
-
-            <div id="content-items" class="donation-content hidden bg-white p-12 rounded-[3rem] shadow-xl text-left max-w-2xl mx-auto border border-gray-100">
-                <h4 class="text-2xl font-black mb-6 uppercase">Хэрэгцээт зүйлс:</h4>
-                <ul class="space-y-4 text-gray-600 font-medium">
-                    <li class="flex items-center space-x-4"><i class="fas fa-check-circle text-rose-500"></i> <span>Амьтны хоол (Хуурай болон лаазалсан)</span></li>
-                    <li class="flex items-center space-x-4"><i class="fas fa-check-circle text-rose-500"></i> <span>Дулаан дэвсгэр, хөнжил, үүр</span></li>
-                    <li class="flex items-center space-x-4"><i class="fas fa-check-circle text-rose-500"></i> <span>Эмчилгээний болон ариун цэврийн хэрэгсэл</span></li>
-                </ul>
-            </div>
-
-            <div id="content-intl" class="donation-content hidden">
-                <div class="qr-card mx-auto inline-block">
-                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=SWIFT:KHANMNUB-ACC:5163XXXX&choe=UTF-8" class="w-64 h-64 rounded-2xl mx-auto grayscale" alt="Intl QR">
+                    <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=5163266775&choe=UTF-8" class="w-64 h-64 mx-auto rounded-3xl" alt="MNT QR">
                     <div class="mt-8 space-y-2">
-                        <p class="text-xl font-black text-dark tracking-tighter">SWIFT: KHANMNUB</p>
-                        <p class="text-lg font-bold text-gray-500">USD ACC: 5163XXXXXX</p>
+                        <p class="font-black text-2xl text-dark">5163266775</p>
+                        <p class="font-bold text-rose-500 uppercase tracking-tighter">Хаан Банк - WitchCraft Army</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CONTACT / FORMSPREE SECTION -->
-    <section id="contact" class="py-24 px-6 bg-white border-t border-gray-50">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-black uppercase italic tracking-tight">Бидэнтэй холбоо барих</h2>
-                <p class="text-gray-500 mt-4 font-medium">Танд асуух зүйл, хамтран ажиллах санал эсвэл тусламж хэрэгтэй бол бидэнд бичээрэй. Бид тантай удахгүй эргэн холбогдох болно.</p>
+            <!-- Global Donation -->
+            <div id="content-global" class="donation-content hidden text-center">
+                <div class="bg-dark text-white p-14 rounded-[4rem] shadow-2xl inline-block min-w-[340px]">
+                    <div class="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fab fa-paypal text-4xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-8 uppercase tracking-widest">PayPal Donate</h3>
+                    <a href="#" class="bg-rose-500 text-white w-full py-5 rounded-2xl font-black uppercase inline-block hover:bg-rose-600 transition shadow-lg shadow-rose-500/20">Donate Now</a>
+                </div>
             </div>
 
-            <form action="https://formspree.io/f/xvgzlowj" method="POST" class="space-y-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="space-y-2 text-left">
-                        <label class="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">Таны нэр</label>
-                        <input type="text" name="name" required class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-rose-500 focus:outline-none transition font-bold text-dark" placeholder="Нэрээ оруулна уу">
+            <!-- Item Donation (NEW) -->
+            <div id="content-items" class="donation-content hidden text-center">
+                <div class="bg-white p-10 md:p-14 rounded-[4rem] shadow-2xl max-w-2xl mx-auto border-4 border-amber-100">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+                        <div class="p-4 bg-amber-50 rounded-3xl flex flex-col items-center">
+                            <i class="fas fa-dog text-3xl text-amber-500 mb-2"></i>
+                            <span class="text-[10px] font-black uppercase">Нохойн хоол</span>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-3xl flex flex-col items-center">
+                            <i class="fas fa-cat text-3xl text-blue-500 mb-2"></i>
+                            <span class="text-[10px] font-black uppercase">Муурын элс</span>
+                        </div>
+                        <div class="p-4 bg-rose-50 rounded-3xl flex flex-col items-center">
+                            <i class="fas fa-medkit text-3xl text-rose-500 mb-2"></i>
+                            <span class="text-[10px] font-black uppercase">Эм хэрэгсэл</span>
+                        </div>
                     </div>
-                    <div class="space-y-2 text-left">
-                        <label class="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">Цахим шуудан</label>
-                        <input type="email" name="email" required class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-rose-500 focus:outline-none transition font-bold text-dark" placeholder="email@example.com">
+                    <h3 class="text-2xl font-black text-dark mb-4 uppercase italic">Хэрэгцээт зүйлс хандивлах</h3>
+                    <p class="text-gray-500 font-medium mb-8">Та амьтдад хэрэгцээтэй хоол, хөнжил, тоглоом зэргийг манай төв дээр авчирч өгөх боломжтой.</p>
+                    <div class="bg-gray-50 p-6 rounded-3xl border-2 border-dashed border-gray-200">
+                        <p class="font-bold text-dark"><i class="fas fa-map-marker-alt text-rose-500 mr-2"></i> Улаанбаатар хот, ХУД, 15-р хороо...</p>
+                        <p class="font-bold text-dark mt-2"><i class="fas fa-phone text-rose-500 mr-2"></i> +976 88XX XXXX</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-left">
-                    <label class="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">Мессеж</label>
-                    <textarea name="message" required rows="5" class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-rose-500 focus:outline-none transition font-bold text-dark" placeholder="Бидэнд хэлэх зүйлээ энд бичнэ үү..."></textarea>
-                </div>
-                <button type="submit" class="w-full bg-rose-500 text-white font-black py-5 rounded-2xl shadow-xl hover:bg-rose-600 transition flex items-center justify-center space-x-3 uppercase tracking-wider">
-                    <i class="fas fa-paper-plane"></i>
-                    <span>Илгээх</span>
-                </button>
-            </form>
+            </div>
         </div>
     </section>
 
     <!-- PARTNERS SECTION -->
-    <section id="partners" class="py-24 bg-gray-50/50 px-6 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-black uppercase italic tracking-tighter">Хамтран ажиллагч байгууллагууд</h2>
-                <div class="h-1 w-20 bg-rose-500 mx-auto mt-4"></div>
+    <section id="partners" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-black mb-16 uppercase italic tracking-tighter">Хамтрагчид</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <a href="https://www.facebook.com/share/1H6G2YVcvT/" target="_blank" class="group relative z-10">
+                    <div class="bg-white h-44 flex flex-col items-center justify-center rounded-[3rem] p-6 shadow-sm border-2 border-gray-50 group-hover:border-rose-500 group-hover:-translate-y-2 transition-all duration-300">
+                        <span class="text-xl font-black uppercase italic text-gray-800">WitchCraft</span>
+                        <span class="mt-2 text-[10px] font-bold text-rose-500 opacity-0 group-hover:opacity-100 transition">ҮЗЭХ</span>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100083204900000" target="_blank" class="group relative z-10">
+                    <div class="bg-white h-44 flex flex-col items-center justify-center rounded-[3rem] p-6 shadow-sm border-2 border-gray-50 group-hover:border-rose-500 group-hover:-translate-y-2 transition-all duration-300">
+                        <span class="text-xl font-black uppercase italic text-gray-800">Гэсэрхэн</span>
+                        <span class="mt-2 text-[10px] font-bold text-rose-500 opacity-0 group-hover:opacity-100 transition">ҮЗЭХ</span>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/shaggytailsmongolia" target="_blank" class="group relative z-10">
+                    <div class="bg-white h-44 flex flex-col items-center justify-center rounded-[3rem] p-6 shadow-sm border-2 border-gray-50 group-hover:border-rose-500 group-hover:-translate-y-2 transition-all duration-300">
+                        <span class="text-xl font-black uppercase italic text-amber-600">Shaggy Tails</span>
+                        <span class="mt-2 text-[10px] font-bold text-rose-500 opacity-0 group-hover:opacity-100 transition">ҮЗЭХ</span>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100083058448888" target="_blank" class="group relative z-10">
+                    <div class="bg-white h-44 flex flex-col items-center justify-center rounded-[3rem] p-6 shadow-sm border-2 border-gray-50 group-hover:border-rose-500 group-hover:-translate-y-2 transition-all duration-300">
+                        <span class="text-xl font-black uppercase italic text-blue-600">Тооройнууд</span>
+                        <span class="mt-2 text-[10px] font-bold text-rose-500 opacity-0 group-hover:opacity-100 transition">ҮЗЭХ</span>
+                    </div>
+                </a>
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <a href="https://www.facebook.com/share/1DyTts9mri/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
-                    <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
-                    <p class="font-black text-xs uppercase text-gray-800">Эгдүүтэй тоорой</p>
-                </a>
+        </div>
+    </section>
 
-                <a href="https://www.facebook.com/share/14a2XwCJNid/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
-                    <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
-                    <p class="font-black text-xs uppercase text-gray-800">SHAGGY TAILS</p>
-                </a>
+    <!-- REGISTRATION SECTION -->
+    <section id="registration" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="registration-card p-12 md:p-16 rounded-[4rem] shadow-2xl text-white relative overflow-hidden">
+                <i class="fas fa-paw absolute -top-10 -right-10 text-[15rem] opacity-10 rotate-12"></i>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-black uppercase italic mb-4 tracking-tighter text-center">Бидэнтэй нэгдээрэй</h2>
+                    <p class="text-center opacity-90 mb-12 font-bold uppercase tracking-widest text-xs">Сайн дурын ажилтан болох</p>
+                    
+                    <form action="https://formspree.io/f/your-form-id" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest ml-4">Таны нэр</label>
+                            <input type="text" name="name" required placeholder="Нэрээ оруулна уу" 
+                                class="w-full px-6 py-5 rounded-3xl bg-white/20 border-2 border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:bg-white focus:text-rose-500 transition font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest ml-4">Имэйл хаяг</label>
+                            <input type="email" name="email" required placeholder="email@example.com" 
+                                class="w-full px-6 py-5 rounded-3xl bg-white/20 border-2 border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:bg-white focus:text-rose-500 transition font-bold">
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest ml-4">Хамтрах чиглэл</label>
+                            <select name="role" required class="w-full px-6 py-5 rounded-3xl bg-white/20 border-2 border-white/30 text-white focus:outline-none focus:bg-white focus:text-rose-500 transition font-bold appearance-none cursor-pointer">
+                                <option value="" disabled selected class="text-gray-400">Чиглэлээ сонгоно уу</option>
+                                <option value="volunteer" class="text-dark">Сайн дурын ажилтан</option>
+                                <option value="foster" class="text-dark">Түр асран хамгаалагч</option>
+                                <option value="creative" class="text-dark">Контент бүтээгч</option>
+                                <option value="funding" class="text-dark">Хандив тусламж</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2 mt-6 text-center">
+                            <button type="submit" class="bg-white text-rose-500 px-16 py-6 rounded-3xl font-black uppercase text-lg shadow-2xl hover:scale-105 active:scale-95 transition-all w-full md:w-auto">
+                                Бүртгүүлэх
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <a href="https://www.facebook.com/share/1TBRbV2Smy/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
-                    <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
-                    <p class="font-black text-xs uppercase text-gray-800 leading-tight">ГЭСЭРХЭН - ANIMAL RESCUE MONGOLIA</p>
-                </a>
-
-                <a href="https://www.facebook.com/share/1H6G2YVcvT/" target="_blank" class="partner-card p-8 rounded-3xl text-center bg-white">
-                    <i class="fab fa-facebook text-3xl text-blue-600 mb-4"></i>
-                    <p class="font-black text-xs uppercase text-gray-800">WITCHCRAFT - ANIMAL CARE</p>
-                </a>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 px-6 bg-white/80">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-black text-center mb-16 uppercase italic tracking-tighter">Холбоо барих</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-rose-50 p-10 rounded-[3rem] text-center border-2 border-transparent hover:border-rose-200 transition">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-envelope text-rose-500 text-2xl"></i>
+                    </div>
+                    <p class="font-black text-dark tracking-tighter">info@witchcraftarmy.mn</p>
+                    <p class="text-[10px] font-bold text-rose-400 uppercase mt-2 tracking-widest">Имэйл илгээх</p>
+                </div>
+                <div class="bg-blue-50 p-10 rounded-[3rem] text-center border-2 border-transparent hover:border-blue-200 transition">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-location-dot text-blue-500 text-2xl"></i>
+                    </div>
+                    <p class="font-black text-dark tracking-tighter">Улаанбаатар, Монгол</p>
+                    <p class="text-[10px] font-bold text-blue-400 uppercase mt-2 tracking-widest">Байршил</p>
+                </div>
+                <div class="bg-amber-50 p-10 rounded-[3rem] text-center border-2 border-transparent hover:border-amber-200 transition">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-phone text-amber-500 text-2xl"></i>
+                    </div>
+                    <p class="font-black text-dark tracking-tighter">+976 88XX XXXX</p>
+                    <p class="text-[10px] font-bold text-amber-400 uppercase mt-2 tracking-widest">Утас</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer-bg py-24 text-white text-center px-6 relative">
-        <div class="max-w-7xl mx-auto space-y-12 relative z-10">
-            <div class="flex justify-center items-center space-x-4">
-                <i class="fas fa-paw text-5xl text-rose-500"></i>
-                <span class="text-4xl font-black uppercase tracking-tighter">WitchCraft Army</span>
+    <footer class="footer-bg py-16 px-6 text-white overflow-hidden relative">
+        <!-- Footer paws background -->
+        <i class="fas fa-paw absolute bottom-0 left-0 text-[10rem] text-white/5 -rotate-12 translate-y-1/2 -translate-x-1/2"></i>
+        
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 relative z-10">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-paw text-4xl text-rose-500"></i>
+                <span class="text-3xl font-black uppercase tracking-tighter">WitchCraft <span class="text-rose-500">Army</span></span>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-16 text-sm font-bold uppercase tracking-widest text-gray-400">
-                <div class="space-y-4">
-                    <p class="text-rose-500 font-black">Холбоо барих</p>
-                    <p class="text-white">info@witchcraftarmy.mn</p>
-                </div>
-                <div class="space-y-4">
-                    <p class="text-rose-500 font-black">Хаяг</p>
-                    <p class="text-white">Улаанбаатар хот</p>
-                </div>
-                <div class="space-y-4">
-                    <p class="text-rose-500 font-black">Биднийг дагах</p>
-                    <div class="flex justify-center space-x-6 text-2xl pt-2">
-                        <a href="https://www.facebook.com/share/1H6G2YVcvT/" class="hover:text-rose-500 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-rose-500 transition"><i class="fab fa-instagram"></i></a>
-                    </div>
+            <div class="flex space-x-10 text-3xl">
+                <a href="https://www.facebook.com/share/1H6G2YVcvT/" target="_blank" class="hover:text-rose-500 transition-all hover:-translate-y-1"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/witchcraft.army/" target="_blank" class="hover:text-rose-500 transition-all hover:-translate-y-1"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-rose-500 transition-all hover:-translate-y-1"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">© 2026 WitchCraft Army NGO</p>
+                <div class="flex items-center justify-center md:justify-end mt-2 space-x-2">
+                    <span class="w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
+                    <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Амь бүхэн үнэ цэнэтэй</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        const config = {
-            projectUrl: "https://publuu.com/flip-book/1096978/2444939",
-            urgentAnimalsUrl: "https://publuu.com/flip-book/1096978/2444987",
-            ourAnimalsUrl: "https://publuu.com/flip-book/1096978/2444973",
-            videoUrl: "https://player.vimeo.com/video/1187192383?h=86e2467d13" 
-        };
+    <!-- SCRIPTS -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'mn',
+                includedLanguages: 'mn,en,ko,ru',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
 
         function switchDonation(type) {
             document.querySelectorAll('.donation-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('bg-white');
+            });
             document.getElementById(`content-${type}`).classList.remove('hidden');
             document.getElementById(`tab-${type}`).classList.add('active');
+            document.getElementById(`tab-${type}`).classList.remove('bg-white');
         }
 
-        function changeLang(lang) {
-            document.getElementById('current-lang-label').innerText = lang.toUpperCase();
+        // Add more random floating paws via JS for "cute background"
+        window.onload = function() {
+            const container = document.querySelector('.paw-bg');
+            const colors = ['#f43f5e', '#fbbf24', '#60a5fa', '#34d399', '#f472b6', '#a78bfa'];
+            for(let i=0; i<15; i++) {
+                const paw = document.createElement('i');
+                paw.className = 'fas fa-paw floating-paw';
+                paw.style.left = Math.random() * 100 + '%';
+                paw.style.fontSize = (Math.random() * 40 + 20) + 'px';
+                paw.style.color = colors[Math.floor(Math.random() * colors.length)];
+                paw.style.opacity = '0.15';
+                paw.style.animationDelay = (Math.random() * 10) + 's';
+                paw.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                container.appendChild(paw);
+            }
         }
-
-        window.onload = () => {
-            document.getElementById('project-details-link').href = config.projectUrl;
-            document.getElementById('urgent-animals-link').href = config.urgentAnimalsUrl;
-            document.getElementById('our-animals-link').href = config.ourAnimalsUrl;
-            document.getElementById('flipbook-link').href = config.urgentAnimalsUrl;
-            document.getElementById('hero-pdf-link').href = config.projectUrl;
-            document.getElementById('video-frame').src = config.videoUrl;
-        };
     </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
